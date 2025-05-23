@@ -2,14 +2,14 @@ matrix:
   - name: rST files
     aspell:
       lang: en
-      d: en_US
+      d: en_GB
     dictionary:
       wordlists:
         - .sphinx/.wordlist.txt
         - .custom_wordlist.txt
       output: .sphinx/.wordlist.dic
     sources:
-      - _build/**/*.html|!_build/genindex/index.html
+      - _build/**/*.html
     pipeline:
       - pyspelling.filters.html:
           comments: false
@@ -28,10 +28,3 @@ matrix:
             - img
             - a.p-navigation__link
             - a.contributor
-            - span.pre
-            - .sig-object
-            - '#module-jubilant em'
-            - '#module-jubilant strong'
-            - '#module-jubilant.statustypes em'
-            - '#module-jubilant.statustypes strong'
-            - a.reference[title^="jubilant."]
