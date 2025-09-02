@@ -71,7 +71,7 @@ jobs:
         run: sudo snap install --classic concierge
 
       - name: Prepare Juju
-        run: sudo concierge prepare --verbose --juju-channel=${{ juju-channel }} --charmcraft-channel=3.x/stable -p microk8s
+        run: sudo concierge prepare --verbose --juju-channel=${{ matrix.juju-channel }} --charmcraft-channel=3.x/stable -p microk8s
 
       - name: Pack test charms
         run: make pack
@@ -105,7 +105,7 @@ jobs:
         run: sudo snap install --classic concierge
 
       - name: Prepare Juju
-        run: sudo concierge prepare --verbose --juju-channel=${{ juju-channel }} --charmcraft-channel=3.x/stable -p machine
+        run: sudo concierge prepare --verbose --juju-channel=${{ matrix.juju-channel }} --charmcraft-channel=3.x/stable -p machine
 
       - name: Pack test charms
         run: make pack
