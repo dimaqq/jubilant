@@ -53,6 +53,8 @@ jobs:
       group: ${{ github.workflow }}-${{ github.ref }}-k8s
       cancel-in-progress: true
 
+    continue-on-error: ${{ matrix.juju-channel == '4/beta' }}
+
     strategy:
       fail-fast: false
       matrix:
@@ -76,6 +78,7 @@ jobs:
 
       - name: Run integration tests
         run: make integration-k8s
+        timeout-minutes: 20  # Juju 4 may get stuck while destroying the test model
 
   integration-machine:
     runs-on: ubuntu-latest
@@ -83,6 +86,8 @@ jobs:
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}-machine
       cancel-in-progress: true
+
+    continue-on-error: ${{ matrix.juju-channel == '4/beta' }}
 
     strategy:
       fail-fast: false
@@ -107,3 +112,4 @@ jobs:
 
       - name: Run integration tests
         run: make integration-machine
+        timeout-minutes: 20  # Juju 4 may get stuck while destroying the test model
