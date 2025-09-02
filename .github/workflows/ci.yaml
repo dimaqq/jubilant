@@ -49,16 +49,16 @@ jobs:
   integration-k8s:
     runs-on: ubuntu-latest
 
-    concurrency:
-      group: ${{ github.workflow }}-${{ github.ref }}-k8s
-      cancel-in-progress: true
-
-    continue-on-error: ${{ matrix.juju-channel == '4/beta' }}
-
     strategy:
       fail-fast: false
       matrix:
         juju-channel: ['3/stable', '4/beta']
+
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}-k8s-${{ toJson(matrix) }}
+      cancel-in-progress: true
+
+    continue-on-error: ${{ matrix.juju-channel == '4/beta' }}
 
     steps:
       - name: Check out repo
@@ -83,16 +83,16 @@ jobs:
   integration-machine:
     runs-on: ubuntu-latest
 
-    concurrency:
-      group: ${{ github.workflow }}-${{ github.ref }}-machine
-      cancel-in-progress: true
-
-    continue-on-error: ${{ matrix.juju-channel == '4/beta' }}
-
     strategy:
       fail-fast: false
       matrix:
         juju-channel: ['3/stable', '4/beta']
+
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}-machine-${{ toJson(matrix) }}
+      cancel-in-progress: true
+
+    continue-on-error: ${{ matrix.juju-channel == '4/beta' }}
 
     steps:
       - name: Check out repo
