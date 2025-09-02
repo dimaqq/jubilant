@@ -53,6 +53,11 @@ jobs:
       group: ${{ github.workflow }}-${{ github.ref }}-k8s
       cancel-in-progress: true
 
+    strategy:
+      fail-fast: false
+      matrix:
+        juju-channel: ['3/stable', '4/beta']
+
     steps:
       - name: Check out repo
         uses: actions/checkout@v4
@@ -64,7 +69,7 @@ jobs:
         run: sudo snap install --classic concierge
 
       - name: Prepare Juju
-        run: sudo concierge prepare --verbose --juju-channel=3/stable --charmcraft-channel=3.x/stable -p microk8s
+        run: sudo concierge prepare --verbose --juju-channel=${{ juju-channel }} --charmcraft-channel=3.x/stable -p microk8s
 
       - name: Pack test charms
         run: make pack
@@ -79,6 +84,11 @@ jobs:
       group: ${{ github.workflow }}-${{ github.ref }}-machine
       cancel-in-progress: true
 
+    strategy:
+      fail-fast: false
+      matrix:
+        juju-channel: ['3/stable', '4/beta']
+
     steps:
       - name: Check out repo
         uses: actions/checkout@v4
@@ -90,7 +100,7 @@ jobs:
         run: sudo snap install --classic concierge
 
       - name: Prepare Juju
-        run: sudo concierge prepare --verbose --juju-channel=3/stable --charmcraft-channel=3.x/stable -p machine
+        run: sudo concierge prepare --verbose --juju-channel=${{ juju-channel }} --charmcraft-channel=3.x/stable -p machine
 
       - name: Pack test charms
         run: make pack
