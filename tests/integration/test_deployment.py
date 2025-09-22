@@ -27,6 +27,7 @@ def test_deploy(juju: jubilant.Juju):
     # Wait for all unit agents to be idle (and ensure all_agents_idle works).
     status = juju.wait(jubilant.all_agents_idle)
     assert jubilant.all_agents_idle(status, 'snappass-test')
+    assert 0
 
 
 def test_add_and_remove_unit(juju: jubilant.Juju):
