@@ -23,6 +23,7 @@ def test_exec(juju: jubilant.Juju):
     task = juju.exec('echo', 'bar', 'baz', machine=0)
     assert task.success
     assert task.stdout == 'bar baz\n'
+    assert 0
 
 
 def test_ssh(juju: jubilant.Juju):
