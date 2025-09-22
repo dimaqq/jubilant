@@ -10,7 +10,7 @@ pytestmark = pytest.mark.machine
 @pytest.fixture(scope='module', autouse=True)
 def setup(juju: jubilant.Juju):
     juju.deploy('ubuntu')
-    juju.wait(jubilant.all_active)
+    juju.wait(jubilant.all_active, delay=0.01)
 
 
 def test_exec(juju: jubilant.Juju):
