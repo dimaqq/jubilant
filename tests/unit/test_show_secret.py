@@ -4,6 +4,7 @@ import jubilant
 from tests.unit.fake_secrets import (
     SINGLE_SECRET,
     SINGLE_SECRET_REVEALED,
+    SINGLE_SECRET_REVEALED_JUJU35,
     SINGLE_SECRET_REVISIONS,
     SINGLE_SECRET_WITH_ACCESS,
 )
@@ -50,6 +51,22 @@ def test_get_secret_with_reveal(run: mocks.Run):
     assert hasattr(response, 'content')
     assert response.content == {'password': 'secret', 'username': 'admin'}
     assert response.checksum == secret.get('checksum')
+
+
+def test_get_secret_with_reveal_juju35(run: mocks.Run):
+    run.handle(
+        ['juju', 'show-secret', 'example-charm-secret', '--format', 'json', '--reveal'],
+        stdout=json.dumps(SINGLE_SECRET_REVEALED_JUJU35),
+    )
+    juju = jubilant.Juju()
+    response = juju.show_secret('example-charm-secret', reveal=True)
+
+    _, secret = next(iter(SINGLE_SECRET_REVEALED.items()))
+    assert secret
+
+    assert hasattr(response, 'content')
+    assert response.content == {'password': 'secret', 'username': 'admin'}
+    assert response.checksum == ''
 
 
 def test_get_secret_with_revisions(run: mocks.Run):

@@ -46,6 +46,21 @@ SINGLE_SECRET_REVEALED = {
     }
 }
 
+SINGLE_SECRET_REVEALED_JUJU35 = {
+    'd1ehcifmp25c76e01vhg': {
+        'revision': 1,
+        'expires': '2025-06-27T09:43:38Z',
+        'rotation': 'daily',
+        'rotates': '2025-06-27T09:43:38Z',
+        'owner': 'example-charm',
+        'description': 'Some description',
+        'label': 'example-charm-secret',
+        'created': '2025-06-26T09:43:38Z',
+        'updated': '2025-06-26T09:43:38Z',
+        'content': {'Data': {'password': 'secret', 'username': 'admin'}},
+    }
+}
+
 SINGLE_SECRET_REVISIONS = {
     'd1ehcifmp25c76e01vhg': {
         'revision': 2,
