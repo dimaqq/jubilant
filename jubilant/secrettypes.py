@@ -79,7 +79,9 @@ class RevealedSecret(Secret):
     def _from_dict(cls, d: dict[str, Any]) -> RevealedSecret:
         kwargs = dataclasses.asdict(super()._from_dict(d))
         return RevealedSecret(
-            content=d['content']['Data'], checksum=d.get('checksum', ''), **kwargs
+            # Secret content checksums were introduced in Juju 3.6.0
+            content=d['content']['Data'], checksum=d.get('checksum', ''),
+            **kwargs,
         )
 
 
