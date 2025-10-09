@@ -70,7 +70,10 @@ class RevealedSecret(Secret):
     """Represents a secret that was revealed, which has a content field that's populated."""
 
     checksum: str
+    """Checksum of the secret value or an empty string for older Juju controllers."""
+
     content: dict[str, str]
+    """Mapping of secret keys to secret values."""
 
     @classmethod
     def _from_dict(cls, d: dict[str, Any]) -> RevealedSecret:
