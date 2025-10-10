@@ -70,7 +70,7 @@ class RevealedSecret(Secret):
     """Represents a secret that was revealed, which has a content field that's populated."""
 
     checksum: str
-    """Checksum of the secret value or an empty string for older Juju controllers < 3.6."""
+    """Checksum of the secret value or an empty string for Juju controllers < 3.6.0."""
 
     content: dict[str, str]
     """Mapping of secret keys to secret values."""
