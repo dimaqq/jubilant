@@ -1138,7 +1138,7 @@ class Juju:
             source: Source of file, in format ``[[<user>@]<target>:]<path>``.
             destination: Destination for file, in format ``[<user>@]<target>[:<path>]``.
             container: Name of container for Kubernetes charms. Defaults to the charm container.
-            host_key_checks: Set to False to disable host key checking (insecure).
+            host_key_checks: Set to false to disable host key checking (insecure).
             scp_options: ``scp`` client options, for example ``['-r', '-C']``.
         """
         # Need this check because str is also an iterable of str.
@@ -1297,7 +1297,7 @@ class Juju:
                 ``juju.ssh('mysql/0', 'echo foo', ...)``.
             args: Arguments of the command.
             container: Name of container for Kubernetes charms. Defaults to the charm container.
-            host_key_checks: Set to False to disable host key checking (insecure).
+            host_key_checks: Set to false to disable host key checking (insecure).
             ssh_options: OpenSSH client options, for example ``['-i', '/path/to/private.key']``.
             user: User account to make connection with. Defaults to ``ubuntu`` account.
         """
