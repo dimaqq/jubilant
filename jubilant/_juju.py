@@ -142,14 +142,14 @@ class Juju:
             cloud: Name of the cloud to add credentials for.
             credential: Path to a YAML file containing credential to add, or a mapping
                 representing the parsed credential YAML (``{'credentials': ...}``).
-            client: Set to True to save credentials on the client, meaning controllers
+            client: Set to true to save credentials on the client, meaning controllers
                 created later will have access to them. You must specify ``client=True``
                 or provide *controller* (or both).
             controller: If specified, save credentials to the named controller.
             region: Cloud region that the credential is valid for.
         """
         if not client and controller is None:
-            raise TypeError('"client" must be True or "controller" must be specified (or both)')
+            raise TypeError('"client" must be true or "controller" must be specified (or both)')
 
         args = ['add-credential', cloud]
 
@@ -330,7 +330,7 @@ class Juju:
                 workload machines in the model, exactly as if the constraints were set with
                 ``juju set-model-constraints``.
             credential: Name of cloud credential to use when bootstrapping.
-            force: If True, allow bypassing of checks such as supported bases.
+            force: If true, allow bypassing of checks such as supported bases.
             model_defaults: Configuration options to set for all models.
             storage_pool: Options for an initial storage pool as key-value pairs. ``name``
                 and ``type`` are required, plus any additional attributes.
@@ -438,7 +438,7 @@ class Juju:
         Args:
             app: Application name to get or set config for.
             values: Mapping of config names to values to set.
-            app_config: When getting config, set this to True to get the
+            app_config: When getting config, set this to true to get the
                 (poorly-named) "application-config" values instead of charm config.
             reset: Key or list of keys to reset to their defaults.
         """
@@ -637,11 +637,11 @@ class Juju:
 
         Args:
             model: Name of model to destroy.
-            destroy_storage: If True, destroy all storage instances in the model.
-            force: If True, force model destruction and ignore any errors.
-            no_wait: If True, rush through model destruction without waiting for each step
+            destroy_storage: If true, destroy all storage instances in the model.
+            force: If true, force model destruction and ignore any errors.
+            no_wait: If true, rush through model destruction without waiting for each step
                 to complete.
-            release_storage: If True, release all storage instances in the model.
+            release_storage: If true, release all storage instances in the model.
                 This is mutually exclusive with *destroy_storage*.
             timeout: Maximum time (in seconds) to wait for each step in the model destruction.
                 This option can only be used with *force*.
@@ -949,7 +949,7 @@ class Juju:
 
         Args:
             app: Name of the application or applications to remove.
-            destroy_storage: If True, also destroy storage attached to application units.
+            destroy_storage: If true, also destroy storage attached to application units.
             force: Force removal even if an application is in an error state.
         """
         args = ['remove-application', '--no-prompt', *app]
@@ -1027,7 +1027,7 @@ class Juju:
                 On Kubernetes models, this is actually the application name (a single string),
                 as individual units are not named; you must use *num_units* to remove more than
                 one unit on a Kubernetes model.
-            destroy_storage: If True, also destroy storage attached to units.
+            destroy_storage: If true, also destroy storage attached to units.
             force: Force removal even if a unit is in an error state.
             num_units: Number of units to remove (Kubernetes models only).
         """
@@ -1333,7 +1333,7 @@ class Juju:
 
         Args:
             app: Application name to set trust status for.
-            remove: Set to True to remove trust status.
+            remove: Set to true to remove trust status.
             scope: On Kubernetes models, this must be set to "cluster", as the trust operation
                 grants the charm full access to the cluster.
         """
@@ -1393,10 +1393,10 @@ class Juju:
         timeout: float | None = None,
         successes: int = 3,
     ) -> Status:
-        """Wait until ``ready(status)`` returns true.
+        """Wait until ``ready(status)`` returns ``True``.
 
         This fetches the Juju status repeatedly (waiting *delay* seconds between each call),
-        and returns the last status after the *ready* callable returns true for *successes*
+        and returns the last status after the *ready* callable returns ``True`` for *successes*
         times in a row.
 
         Example::
@@ -1422,21 +1422,21 @@ class Juju:
             logging.getLogger('jubilant.wait').setLevel('WARNING')
 
         Args:
-            ready: Callable that takes a :class:`Status` object and returns true when the wait
-                should be considered ready. It needs to return true *successes* times in a row
+            ready: Callable that takes a :class:`Status` object and returns ``True`` when the wait
+                should be considered ready. It needs to return ``True`` *successes* times in a row
                 before ``wait`` returns.
-            error: Callable that takes a :class:`Status` object and returns true when ``wait``
+            error: Callable that takes a :class:`Status` object and returns ``True`` when ``wait``
                 should raise an error (:class:`WaitError`).
             delay: Delay in seconds between status calls.
             timeout: Overall timeout in seconds; :class:`TimeoutError` is raised if this
                 is reached. If not specified, uses the *wait_timeout* specified when the
                 instance was created.
-            successes: Number of times *ready* must return true for the wait to succeed.
+            successes: Number of times *ready* must return ``True`` for the wait to succeed.
 
         Raises:
             TimeoutError: If the *timeout* is reached. A string representation
                 of the last status, if any, is added as an exception note.
-            WaitError: If the *error* callable returns True. A string representation
+            WaitError: If the *error* callable returns ``True``. A string representation
                 of the last status is added as an exception note.
         """
         if timeout is None:

@@ -210,9 +210,9 @@ def test_active(juju: jubilant.Juju, app: str):
 
 However, instead of calling `status` directly, it's usually better to wait for a certain condition to be true. In python-libjuju you used `model.wait_for_idle`; in Jubilant you use [`juju.wait`](jubilant.Juju.wait), which has a simpler and more consistent API.
 
-The `wait` method takes a *ready* callable, which takes a [`Status`](jubilant.Status) object. Internally, `wait` polls `juju status` every second and calls the *ready* callable, which must return True three times in a row (this is configurable).
+The `wait` method takes a *ready* callable, which takes a [`Status`](jubilant.Status) object. Internally, `wait` polls `juju status` every second and calls the *ready* callable, which must return `True` three times in a row (this is configurable).
 
-You can optionally provide an *error* callable, which also takes a `Status` object. If the *error* callable returns True, `wait` raises a [`WaitError`](jubilant.WaitError) immediately.
+You can optionally provide an *error* callable, which also takes a `Status` object. If the *error* callable returns `True`, `wait` raises a [`WaitError`](jubilant.WaitError) immediately.
 
 Jubilant provides helper functions to use for the *ready* and *error* callables, such as [`jubilant.all_active`](jubilant.all_active) and [`jubilant.any_error`](jubilant.any_error). These check whether the workload status of all (or any) applications and their units are in a given state.
 
