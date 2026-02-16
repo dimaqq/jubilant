@@ -1,8 +1,0 @@
-copilot:
-  version: "v0.6.0"
-
-  collections:
-    - charm-tech-core
-    - charm-tech-python-library
-    - charm-tech-docs
-    - charm-tech-make
